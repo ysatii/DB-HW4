@@ -61,7 +61,7 @@ LEFT JOIN rental r ON r.inventory_id = i.inventory_id
 WHERE r.rental_id IS NULL;
 ```
 
-рис 5
+![рис 5](https://github.com/ysatii/DB-HW4/blob/main/img/image5.jpg)
 
 вариант 2  
 усложним запрос добавим в него описание и категорию фильма, возможно это поможет понять  почему фильмы не брали в аренду  
@@ -75,7 +75,7 @@ LEFT JOIN inventory i ON i.film_id = f.film_id
 LEFT JOIN rental r ON r.inventory_id = i.inventory_id
 WHERE r.rental_id IS NULL
 ```
-
+https://github.com/ysatii/DB-HW4/blob/main/img/image5_1.jpg
 
 в поле выводим результат подзапроса film_cat
 
