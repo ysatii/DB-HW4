@@ -111,6 +111,7 @@ GROUP BY MONTH(payment_date)
 ```
 ![рис 3](https://github.com/ysatii/DB-HW4/blob/main/img/image3.jpg)
 
+## Окончательный запрос
 ```
 SELECT MONTH(payment_date) AS Month, COUNT(payment_id) As Payments, SUM(amount) AS Amount
 FROM payment
