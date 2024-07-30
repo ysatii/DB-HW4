@@ -75,7 +75,29 @@ GROUP BY c.store_id
 Получите количество фильмов, продолжительность которых больше средней продолжительности всех фильмов.
 
 ## Решение 2
-  
+
+запрос 
+```select count(*)
+from film f
+join (SELECT  AVG(`length`) AS Average from film) t 
+WHERE f.`length` > Average
+```
+![рис 2](https://github.com/ysatii/DB-HW4/blob/main/img/image2.jpg)
+
+средняя продолжительность
+```
+-- 115.2720
+SELECT  AVG(`length`) from film
+```
+![рис 2_1](https://github.com/ysatii/DB-HW4/blob/main/img/image2_1.jpg)
+
+колличество фильмов продолжительность которых больше средней
+```
+select count(*)
+from film 
+WHERE `length` > 115.2720
+```
+![рис 2_2](https://github.com/ysatii/DB-HW4/blob/main/img/image2_2.jpg)
 
 ## Задание 3
 Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
