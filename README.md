@@ -109,7 +109,17 @@ WHERE `length` > 115.2720
 Посчитайте количество продаж, выполненных каждым продавцом. Добавьте вычисляемую колонку «Премия». Если количество продаж превышает 8000, то значение в колонке будет «Да», иначе должно быть значение «Нет».
 
 ## Решение 4
-
+```
+select CONCAT(s.first_name, ' ', s.last_name) as Name, count(*), COUNT(1) AS Sales,
+	CASE
+		WHEN COUNT(1) > 8000 THEN 'Yes'
+		ELSE 'No'
+	END AS Premium
+from payment p 
+join staff s on s.staff_id = p.staff_id
+group by p.staff_id 
+```
+![рис 4](https://github.com/ysatii/DB-HW4/blob/main/img/image4.jpg)
 
 ## Задание 5*
 Найдите фильмы, которые ни разу не брали в аренду.
