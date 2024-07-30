@@ -103,7 +103,21 @@ WHERE `length` > 115.2720
 Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
 
 ## Решение 3
+```
+SELECT MONTH(payment_date) AS Month, COUNT(payment_id) As Payments, SUM(amount) AS Amount
+FROM payment
+GROUP BY MONTH(payment_date) 
+-- ORDER BY COUNT(payment_id)  DESC LIMIT 1 ;
+```
+![рис 3](https://github.com/ysatii/DB-HW4/blob/main/img/image3.jpg)
 
+```
+SELECT MONTH(payment_date) AS Month, COUNT(payment_id) As Payments, SUM(amount) AS Amount
+FROM payment
+GROUP BY MONTH(payment_date) 
+ORDER BY COUNT(payment_id)  DESC LIMIT 1 ;
+```
+![рис 3_1](https://github.com/ysatii/DB-HW4/blob/main/img/image3_1.jpg)
 
 ## Задание 4
 Посчитайте количество продаж, выполненных каждым продавцом. Добавьте вычисляемую колонку «Премия». Если количество продаж превышает 8000, то значение в колонке будет «Да», иначе должно быть значение «Нет».
