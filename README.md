@@ -51,3 +51,35 @@
 
 
 ## Решение 5
+
+Вариант 1  
+```
+SELECT f.title
+FROM film f
+LEFT JOIN inventory i ON i.film_id = f.film_id
+LEFT JOIN rental r ON r.inventory_id = i.inventory_id
+WHERE r.rental_id IS NULL;
+```
+
+рис 5
+
+вариант 2  
+усложним запрос добавим в него описание и категорию фильма, возможно это поможет понять  почему фильмы не брали в аренду  
+```
+SELECT f.film_id, f.title, f.description , (select c.name
+from category c 
+INNER JOIN film_category fc on fc.category_id = c.category_id
+inner join film fl on f.film_id = fc.film_id where fl.title = f.title) as film_cat
+FROM film f
+LEFT JOIN inventory i ON i.film_id = f.film_id
+LEFT JOIN rental r ON r.inventory_id = i.inventory_id
+WHERE r.rental_id IS NULL
+```
+
+
+в поле выводим результат подзапроса film_cat
+
+ (select c.name
+from category c 
+INNER JOIN film_category fc on fc.category_id = c.category_id
+inner join film fl on f.film_id = fc.film_id where fl.title = f.title) 
