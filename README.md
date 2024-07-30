@@ -26,8 +26,51 @@
 - количество пользователей, закреплённых в этом магазине.
 
 
-## Решение 1  
-  
+## Решение 1 
+запрос  
+```
+SELECT CONCAT(s2.first_name, ' ', s2.last_name) AS Name, c2.city, a.address AS Address, COUNT(c.store_id) AS Customers
+FROM store s 
+JOIN customer c ON c.store_id = s.store_id 
+JOIN staff s2 ON s2.staff_id = s.manager_staff_id
+JOIN address a ON a.address_id = s.address_id 
+join city c2 on c2.city_id = a.city_id 
+GROUP BY c.store_id 
+HAVING COUNT(c.store_id) > 300;
+```
+![рис 1](https://github.com/ysatii/DB-HW4/blob/main/img/image1.jpg)
+
+проверим себя, получим полные данные по пользователям в магазине  
+```
+SELECT CONCAT(s2.first_name, ' ', s2.last_name) AS Name, c2.city_id, c2.city, a.address_id, a.address AS Address, COUNT(c.store_id) AS Customers
+FROM store s 
+JOIN customer c ON c.store_id = s.store_id 
+JOIN staff s2 ON s2.staff_id = s.manager_staff_id
+JOIN address a ON a.address_id = s.address_id 
+join city c2 on c2.city_id = a.city_id 
+GROUP BY c.store_id 
+-- HAVING COUNT(c.store_id) > 300;
+```
+![рис 1_1](https://github.com/ysatii/DB-HW4/blob/main/img/image1_1.jpg)
+
+получим данные по городам в которых находяться магазины  
+```
+select *
+from city
+where city_id in (300, 576)
+```
+![рис 1_2](https://github.com/ysatii/DB-HW4/blob/main/img/image1_2.jpg)
+
+получим колличество пользователей в каждом магазине  
+```
+select s.store_id, COUNT(c.store_id) AS Customers
+from customer c
+join store s on s.store_id = c.store_id 
+GROUP BY c.store_id 
+```
+![рис 1_3](https://github.com/ysatii/DB-HW4/blob/main/img/image1_3.jpg)
+
+
 ## Задание 2
 Получите количество фильмов, продолжительность которых больше средней продолжительности всех фильмов.
 
@@ -77,7 +120,7 @@ WHERE r.rental_id IS NULL
 ```
 ![рис 5](https://github.com/ysatii/DB-HW4/blob/main/img/image5_1.jpg)
 
-в поле выводим результат подзапроса film_cat
+в поле film_cat выводим результат подзапроса 
 
  (select c.name
 from category c 
